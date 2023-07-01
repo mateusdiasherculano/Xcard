@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf_generator/src/features/screen/home_screen.dart';
 import 'package:pdf_generator/src/features/screen/signup_screen.dart';
@@ -108,6 +109,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, digite o e-mail';
+                          }
+                          if (!EmailValidator.validate(value)) {
+                            return 'E-mail inválido';
                           }
                           // Adicione outras validações de e-mail aqui, se necessário
                           return null; // A validação passou

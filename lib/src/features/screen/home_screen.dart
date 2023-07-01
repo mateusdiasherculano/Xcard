@@ -20,9 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
-        children: [
+        children: const [
           ModelRegistrationScreen(),
-          const UserListScreen(),
+          UserListScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

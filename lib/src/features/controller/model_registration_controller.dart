@@ -21,23 +21,26 @@ class ModelRegistrationController extends ChangeNotifier {
     pdf.addPage(
       pw.Page(
         build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Column(
-              mainAxisAlignment: pw.MainAxisAlignment.center,
-              children: [
-                pw.Text(
+          return pw.Stack(
+            children: [
+              // Imagem de fundo
+              pw.Image(pw.MemoryImage(bytes)),
+
+              // Texto sobreposto
+              pw.Positioned(
+                top: 100,
+                right: 20, // Alinhamento à direita
+                child: pw.Text(
                   name,
                   style: pw.TextStyle(
-                    fontSize: 18,
-                    color: PdfColors.black,
+                    fontSize: 24, // Tamanho da fonte aumentado
+                    color: PdfColors.orange, // Cor laranja
                     fontWeight: pw.FontWeight.bold,
                   ),
-                  textAlign: pw.TextAlign.center,
+                  textAlign: pw.TextAlign.right, // Alinhamento à direita
                 ),
-                pw.SizedBox(height: 20),
-                pw.Image(pw.MemoryImage(bytes)),
-              ],
-            ),
+              ),
+            ],
           );
         },
       ),

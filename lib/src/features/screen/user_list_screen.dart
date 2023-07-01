@@ -35,7 +35,11 @@ class UserListScreen extends StatelessWidget {
           : const Center(
               child: Text(
                 'Nenhum cliente cadastrado',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.orange,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
     );
