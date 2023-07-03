@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../features/controller/model_registration_controller.dart';
-import '../features/screen/pdf_screen.dart';
+import '../controller/cadastro_model_controller.dart';
+import 'pdf_screen.dart';
 
-class ModelRegistrationScreen extends StatefulWidget {
-  const ModelRegistrationScreen({Key? key}) : super(key: key);
+class CadastroModelScreen extends StatefulWidget {
+  const CadastroModelScreen({Key? key}) : super(key: key);
 
   @override
-  _ModelRegistrationScreenState createState() =>
-      _ModelRegistrationScreenState();
+  _CadastroModelScreenState createState() => _CadastroModelScreenState();
 }
 
-class _ModelRegistrationScreenState extends State<ModelRegistrationScreen> {
+class _CadastroModelScreenState extends State<CadastroModelScreen> {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final imageUrlController = TextEditingController();
@@ -54,7 +53,7 @@ class _ModelRegistrationScreenState extends State<ModelRegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gerador PDF'),
+        title: const Text('Cadastro de Modelo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -89,7 +88,7 @@ class _ModelRegistrationScreenState extends State<ModelRegistrationScreen> {
                     ),
                     ElevatedButton(
                       onPressed: isLoading ? null : _createPDF,
-                      child: const Text('Criar PDF'),
+                      child: const Text('Salvar'),
                     ),
                   ],
                 ),

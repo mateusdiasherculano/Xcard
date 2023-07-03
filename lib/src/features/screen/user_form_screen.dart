@@ -37,7 +37,7 @@ class _UserFormScreen extends State<UserFormScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Formulário de Usuário'),
+        title: const Text('Formulário de Cliente'),
         actions: [
           IconButton(
             onPressed: () {

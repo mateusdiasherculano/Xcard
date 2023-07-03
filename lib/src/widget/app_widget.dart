@@ -3,12 +3,11 @@ import 'package:pdf_generator/src/features/controller/signin_controller.dart';
 import 'package:provider/provider.dart';
 
 import '../core/routes.dart';
+import '../features/controller/cadastro_model_controller.dart';
 import '../features/controller/cadastro_user_controller.dart';
-import '../features/controller/model_registration_controller.dart';
-import '../features/controller/signup_controller.dart';
+import '../features/controller/create_perfil_controller.dart';
 import '../features/controller/user_provider.dart';
 import '../features/screen/signin_screen.dart';
-import '../features/screen/user_form_screen.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -33,9 +32,8 @@ class AppWidget extends StatelessWidget {
           primarySwatch: Colors.orange,
         ),
         home: SignInScreen(),
-        routes: {
-          AppRoutes.USER_FORM: (ctx) => UserFormScreen(),
-        },
+        //onGenerateRoute: ,
+        onGenerateRoute: Routes.generateRoute,
       ),
     );
   }

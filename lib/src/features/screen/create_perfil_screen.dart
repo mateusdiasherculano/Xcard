@@ -5,16 +5,16 @@ import 'package:pdf_generator/src/features/screen/signin_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/formatter.dart';
-import '../controller/signup_controller.dart';
+import '../controller/create_perfil_controller.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class CreatePerfilScreen extends StatefulWidget {
+  const CreatePerfilScreen({Key? key}) : super(key: key);
 
   @override
-  SignUpScreenState createState() => SignUpScreenState();
+  CreatePerfilScreenState createState() => CreatePerfilScreenState();
 }
 
-class SignUpScreenState extends State<SignUpScreen> {
+class CreatePerfilScreenState extends State<CreatePerfilScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();

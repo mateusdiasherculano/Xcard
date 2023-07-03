@@ -1,8 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_generator/src/features/screen/home_screen.dart';
-import 'package:pdf_generator/src/features/screen/signup_screen.dart';
+import 'package:pdf_generator/src/features/screen/menu_principal.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/custom_text_field.dart';
@@ -150,7 +149,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 if (_isFormValid) {
                                   Navigator.of(context)
                                       .push(MaterialPageRoute(builder: (c) {
-                                    return const HomeScreen();
+                                    return MenuPrincipal();
                                   }));
                                 }
                               },
@@ -160,72 +159,6 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             );
                           })),
-                      /*Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Esqueceu a senha?',
-                            style: TextStyle(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),*/
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Divider(
-                                color: Colors.grey.withAlpha(90),
-                                thickness: 2,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: Text('Ou'),
-                            ),
-                            Expanded(
-                              child: Divider(
-                                color: Colors.grey.withAlpha(90),
-                                thickness: 2,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            side: const BorderSide(
-                              width: 2,
-                              color: Colors.orange,
-                            ),
-                          ),
-                          onPressed: () {
-                            _controller.submitForm(
-                              _formKey,
-                              _emailController.text,
-                              _passwordController.text,
-                            );
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (c) {
-                              return const SignUpScreen();
-                            }));
-                          },
-                          child: const Text(
-                            'Criar conta',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),

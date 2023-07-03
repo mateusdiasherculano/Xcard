@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/routes.dart';
 import '../../models/user.dart';
 import '../controller/user_provider.dart';
 
@@ -35,7 +34,7 @@ class CadastroUserScreen extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed(
-                      AppRoutes.USER_FORM,
+                      'CadastroUsuario',
                       arguments: user,
                     );
                   },
