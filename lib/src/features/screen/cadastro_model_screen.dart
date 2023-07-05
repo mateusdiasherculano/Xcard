@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pdf_generator/src/features/screen/pdf_screen.dart';
 
 import '../controller/cadastro_model_controller.dart';
-import 'pdf_screen.dart';
 
 class CadastroModelScreen extends StatefulWidget {
   const CadastroModelScreen({Key? key}) : super(key: key);
@@ -53,7 +53,7 @@ class _CadastroModelScreenState extends State<CadastroModelScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro de Modelo'),
+        title: const Text('Modelo PDF'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -88,7 +88,7 @@ class _CadastroModelScreenState extends State<CadastroModelScreen> {
                     ),
                     ElevatedButton(
                       onPressed: isLoading ? null : _createPDF,
-                      child: const Text('Salvar'),
+                      child: const Text('Criar Modelo PDF'),
                     ),
                   ],
                 ),
