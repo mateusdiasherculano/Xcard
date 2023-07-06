@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/data_management.dart';
+
 class GeradorPDF extends StatefulWidget {
   const GeradorPDF({Key? key}) : super(key: key);
 
@@ -13,13 +15,48 @@ class _GeradorPDFState extends State<GeradorPDF> {
   String? selectedSex;
   DateTime? selectedDate;
 
-  List<String> cardModels = [
-    'Dia das Mães',
-    'Dia dos Pais',
-    'Feliz Aniversário'
-  ];
-  List<String> cities = ['Brasília', 'Goiânia'];
-  List<String> sexes = ['Todos', 'M', 'F'];
+  List<String> cardModels = [];
+  List<String> cities = [];
+  List<String> sexes = [];
+
+  final dataManagement = DataManagement();
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    try {
+      final cardModelsData = await dataManagement.getCardModels();
+      final citiesData = await dataManagement.getCities();
+      final sexesData = await dataManagement.getSexes();
+
+      setState(() {
+        cardModels = cardModelsData.map((model) => model.name).toList();
+        cities = citiesData;
+        sexes = sexesData;
+      });
+    } catch (e) {
+      // Trate qualquer erro de carregamento dos dados do banco de dados
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Erro'),
+          content: const Text('Falha ao carregar os dados do banco de dados.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

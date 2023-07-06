@@ -11,6 +11,7 @@ class ModelRegistrationController extends ChangeNotifier {
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
   final imageUrlController = TextEditingController();
+  String? imagePath;
 
   Future<String> createPDF(String name, String imageUrl) async {
     final pdf = pw.Document();
@@ -52,6 +53,7 @@ class ModelRegistrationController extends ChangeNotifier {
 
     notifyListeners();
 
+    imagePath = outputDir.path;
     return outputFile.path;
   }
 
