@@ -31,22 +31,22 @@ class CardPdfScreen extends StatelessWidget {
           children: [
             Text(
               'Modelo do Cartão: $cardModel',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 10),
             Text(
               'Cidade: $city',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 10),
             Text(
               'Sexo: $sex',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 10),
             Text(
               'Data de Aniversário: ${dateOfBirth.day}/${dateOfBirth.month}/${dateOfBirth.year}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             // Resto do código para exibir os cartões personalizados
           ],

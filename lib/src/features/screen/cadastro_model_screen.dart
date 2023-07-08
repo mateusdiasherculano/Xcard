@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:pdf_generator/src/features/screen/pdf_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../controller/cadastro_model_controller.dart';
 
@@ -12,35 +14,44 @@ class CadastroModelScreen extends StatefulWidget {
 
 class _CadastroModelScreenState extends State<CadastroModelScreen> {
   final formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final imageUrlController = TextEditingController();
+  File? imageFile;
   bool isLoading = false;
-  final logic = ModelRegistrationController();
+  final controller = CadastroModelController();
 
   @override
   void dispose() {
-    nameController.dispose();
-    imageUrlController.dispose();
     super.dispose();
   }
 
-  void _createPDF() async {
-    if (validate()) {
-      final name = nameController.text;
-      final imageURL = imageUrlController.text;
+  void _pickImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.getImage(source: ImageSource.gallery);
 
+    if (pickedImage != null) {
+      setState(() {
+        imageFile = File(pickedImage.path);
+      });
+    }
+  }
+
+  void _createPDF(BuildContext context) async {
+    if (validate()) {
       setState(() {
         isLoading = true;
       });
 
-      logic.createPDF(name, imageURL).then((pdfPath) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return PDFScreen(pdfPath: pdfPath);
-        }));
-      }).whenComplete(() {
-        setState(() {
-          isLoading = false;
-        });
+      await controller.createPDF(imageFile);
+
+      setState(() {
+        isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Cartão de modelo PDF criado com sucesso'),
+        ),
+      );
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.of(context).pop();
       });
     }
   }
@@ -58,49 +69,37 @@ class _CadastroModelScreenState extends State<CadastroModelScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SafeArea(
-          child: Stack(
-            children: [
-              Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    TextFormField(
-                      controller: nameController,
-                      decoration: const InputDecoration(labelText: 'Nome'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira um nome.';
-                        }
-                        return null;
-                      },
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _pickImage,
+                          child: const Text('Selecionar Imagem'),
+                        ),
+                        if (imageFile != null)
+                          Image.file(
+                            imageFile!,
+                            height: 200,
+                          ),
+                      ],
                     ),
-                    TextFormField(
-                      controller: imageUrlController,
-                      decoration:
-                          const InputDecoration(labelText: 'URL da imagem'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira uma URL de imagem.';
-                        }
-                        return null;
-                      },
-                    ),
-                    ElevatedButton(
-                      onPressed: isLoading ? null : _createPDF,
-                      child: const Text('Criar Modelo PDF'),
-                    ),
-                  ],
-                ),
-              ),
-              if (isLoading)
-                Container(
-                  color: Colors.black54,
-                  child: const Center(
-                    child: CircularProgressIndicator(),
                   ),
                 ),
-            ],
+                ElevatedButton(
+                  onPressed: isLoading ? null : () => _createPDF(context),
+                  child: const Text('Criar Modelo PDF'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

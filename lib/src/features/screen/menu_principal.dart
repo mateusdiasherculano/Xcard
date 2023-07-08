@@ -4,6 +4,8 @@ import '../../shared/CirclePainter.dart';
 import '../../shared/appbar.dart';
 
 class MenuPrincipal extends StatelessWidget {
+  const MenuPrincipal({super.key});
+
   @override
   Widget build(BuildContext context) {
     return appBar(
@@ -60,7 +62,8 @@ class ItemMenuPrincipal extends StatelessWidget {
   final Function()? onTap;
 
   ItemMenuPrincipal(
-      {required this.icon,
+      {super.key,
+      required this.icon,
       required this.text,
       this.isEnable = false,
       this.onTap});
@@ -113,7 +116,7 @@ class ItemMenuPrincipal extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: containerSize / 3.89,
                   child: Center(
                     child: Text(
